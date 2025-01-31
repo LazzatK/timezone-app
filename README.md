@@ -1,24 +1,17 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Questions and comments
 
-## Getting Started
+During testing, the expected application behavior was not entirely clear, so I made some assumptions, which I have described below. Additionally, there are some questions that I would discuss and clarify with the product team, engineers, etc in the real project:
 
-First, run the development server:
+1. Behavior after page refresh – If the 'You' row is not present in the table and the user refreshes the page (by clicking the browser’s 'Refresh' button), all rows disappear, leaving only the 'You' row displayed.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+2. Error banner – After clicking the browser’s 'Refresh' button, an error banner appears at the left bottom corner of the page. I assume this happens because the app is running in the Dev environment. In a real project, I would reach out to the engineering team to clarify this behavior.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Deleting the 'You' row – The behavior of the 'Delete' button is unclear. Should it be disabled, or should it display a warning/error message? In my tests, I assumed that the 'Delete' button should be disabled.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Sorting by time – I assumed that rows with the same time should be sorted alphabetically by their time zone name to ensure a deterministic order. This assumption should be clarified with the project manager, UX team, etc.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+5. Duplicate labels – The app allows adding rows with the same labels but different time zones.
 
-## Testing
+6. Adding rows with the same time zone – If a user tries to add a row with the same time zone (regardless of the label), the new row is not added, and no warning or error message is displayed.
 
-To run tests, ensure that the development server is running in background. Then, run `npm run e2e` or `yarn e2e` to execute tests. If this is your first time running Playwright tests, you should run `npx playwright install` or `yarn playwright install` to install browser binaries.
-
+7. "Local (You)" row – The table should always include the "Local (You)" row by default. However, as a user, I can add another row with the same "Local (You)" label and it can cause the confusion. Probably it should not be allowed.
